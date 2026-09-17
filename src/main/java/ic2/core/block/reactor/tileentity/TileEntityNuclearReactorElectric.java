@@ -424,7 +424,7 @@ public class TileEntityNuclearReactorElectric extends TileEntityInventory implem
 			return false;
 		} else
 		{
-			return (!forInsertion || !this.fluidCooled || item.getClass() != ItemReactorHeatStorage.class || stack.getDamageValue() <= 0) && item instanceof IBaseReactorComponent && (!forInsertion || ((IBaseReactorComponent) item).canBePlacedIn(stack, this));
+			return (!forInsertion || !this.fluidCooled || item.getClass() != ItemReactorHeatStorage.class || ((ItemReactorHeatStorage) item).getCurrentHeat(stack, this, 0, 0) <= 0) && item instanceof IBaseReactorComponent && (!forInsertion || ((IBaseReactorComponent) item).canBePlacedIn(stack, this));
 		}
 	}
 
