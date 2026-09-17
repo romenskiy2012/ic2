@@ -45,7 +45,7 @@ public class TileEntityFluidHeatGenerator extends TileEntityHeatSourceInventory 
 		this.fluidSlot = new InvSlotConsumableLiquidByManager(this, "fluidSlot", 1, Recipes.fluidHeatGenerator);
 		this.outputSlot = new InvSlotOutput(this, "output", 1);
 		this.fluids = this.addComponent(new Fluids(this));
-		this.fluidTank = this.fluids.addTankInsert("fluidTank", 10000, Fluids.fluidPredicate(Recipes.semiFluidGenerator));
+		this.fluidTank = this.fluids.addTankInsert("fluidTank", 10000, Fluids.fluidPredicate(Recipes.fluidHeatGenerator));
 	}
 
 	public static void init()

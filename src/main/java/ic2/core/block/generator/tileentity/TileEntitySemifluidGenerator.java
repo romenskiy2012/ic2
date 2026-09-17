@@ -42,8 +42,9 @@ public class TileEntitySemifluidGenerator extends TileEntityBaseGenerator
 		Recipes.semiFluidGenerator = new SemiFluidFuelManager();
 		if ((float) IC2Config.balance.energy.generator.semiFluidBiogas.get().floatValue() > 0.0F)
 		{
-			addFuel(Ic2Fluids.BIOGAS.still(), 10, Math.round(16.0F * (float) IC2Config.balance.energy.generator.semiFluidBiogas.get().floatValue()));
+			addFuel(Ic2Fluids.BIOGAS.still(), 32, Math.round(16.0F * (float) IC2Config.balance.energy.generator.semiFluidBiogas.get().floatValue()));
 		}
+		addFuel(Ic2Fluids.CREOSOTE.still(), 3, 8);
 	}
 
 	public static void addFuel(Fluid fluid, int amount, int eu)
@@ -62,6 +63,26 @@ public class TileEntitySemifluidGenerator extends TileEntityBaseGenerator
 	}
 
 	@Override
+	public boolean gainEnergy()
+	{
+		if (this.isConverting())
+		{
+			double generated = Math.min(this.fuel, this.production);
+			this.energy.addEnergy(generated);
+			this.fuel = (int) (this.fuel - generated);
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean needsFuel()
+	{
+		return this.fuel < this.production && this.energy.getFreeEnergy() >= this.production;
+	}
+
+	@Override
 	public boolean gainFuel()
 	{
 		boolean dirty = false;
@@ -69,12 +90,17 @@ public class TileEntitySemifluidGenerator extends TileEntityBaseGenerator
 		if (ret != null)
 		{
 			ISemiFluidFuelManager.BurnProperty property = Recipes.semiFluidGenerator.getBurnProperty(ret.getFluid());
-			if (property != null && ret.getAmountMb() >= property.amount())
+			if (property != null)
 			{
-				this.fluidTank.drainMbUnchecked(property.amount(), false);
-				this.production = property.power();
-				this.fuel = this.fuel + property.amount();
-				dirty = true;
+				int toBeConsumed = property.amount() >= property.power() ? 1 : (int) Math.ceil(property.power() / property.amount());
+				toBeConsumed = Math.min(toBeConsumed, ret.getAmountMb());
+				if (toBeConsumed > 0)
+				{
+					this.fluidTank.drainMbUnchecked(toBeConsumed, false);
+					this.production = property.power();
+					this.fuel = this.fuel + toBeConsumed * property.amount();
+					dirty = true;
+				}
 			}
 		}
 
