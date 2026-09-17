@@ -44,6 +44,7 @@ public class TileEntitySemifluidGenerator extends TileEntityBaseGenerator
 		{
 			addFuel(Ic2Fluids.BIOGAS.still(), 32, Math.round(16.0F * (float) IC2Config.balance.energy.generator.semiFluidBiogas.get().floatValue()));
 		}
+		addFuel(Ic2Fluids.CREOSOTE.still(), 3, 8);
 	}
 
 	public static void addFuel(Fluid fluid, int amount, int eu)
