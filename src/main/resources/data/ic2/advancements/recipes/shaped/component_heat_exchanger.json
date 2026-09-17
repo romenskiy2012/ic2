@@ -25,7 +25,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ic2:shaped/heat_exchanger_from_gold"
+        "recipe": "ic2:shaped/component_heat_exchanger"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -39,7 +39,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ic2:shaped/heat_exchanger_from_gold"
+      "ic2:shaped/component_heat_exchanger"
     ]
   },
   "sends_telemetry_event": true
