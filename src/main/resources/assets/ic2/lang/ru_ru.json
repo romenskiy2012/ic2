@@ -1081,5 +1081,9 @@
 	"itemGroup.ic2.machines": "IC2 Машины",
 	"itemGroup.ic2.materials": "IC2 Материалы",
 	"itemGroup.ic2.reactor": "IC2 Реактор",
-	"itemGroup.ic2.tools_and_utilities": "IC2 Инструменты и утилиты"
+	"itemGroup.ic2.tools_and_utilities": "IC2 Инструменты и утилиты",
+	"item.ic2.cable.tooltip0": "Макс.: %s EU/т",
+	"item.ic2.cable.tooltip1": "Потери: %s EU/т",
+	"ic2.reactoritem.heatwarning.line1": "Нельзя использовать в режиме жидкостного охлаждения",
+	"ic2.reactoritem.heatwarning.line2": "Используйте в режиме EU"
 }
